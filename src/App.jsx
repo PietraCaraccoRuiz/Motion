@@ -8,7 +8,10 @@ import Card from "./components/Card"
 function App() {
   return (
     <>
+    <div className='flex m-20 mx-70 gap-10'>
       <Card />
+    </div>
+      
       <ScrollAnimations/>
       <AnimatedSection direction="up" delay={0.3}>
         <h1 className="text-5xl font-bold">Hello Motion</h1>

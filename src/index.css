@@ -1,5 +1,10 @@
 @import "tailwindcss";
+
 /* trava o scroll horizontal em todo o site */
 html, body {
   overflow-x: hidden;
+  background-color: aqua;
+  display: flex;
+  align-items: start;
+  justify-content: start;
 }
