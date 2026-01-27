@@ -16,10 +16,10 @@ import { Fragment } from "react";
 
 export default function ScrollTriggered() {
   return (
-    <div className="max-w-[1500px] pb-20 w-full mx-auto">
+    <div className="max-w-[1200px] pb-20 w-full mx-auto relative">
       {food.map(([emoji, hueA, hueB, logo, title], i) => (
         <Fragment key={i}>
-        <div className="flex justify-center items-center gap-6 ">
+        <div className="flex justify-center items-center gap-6 pt-20">
           <img src={logo} className="w-15"/>
           <h1 className="font-bold text-5xl">{title}</h1>
         </div>
@@ -46,15 +46,16 @@ function Card({ emoji, hueA, hueB}) {
         relative
         overflow-hidden
         flex items-center justify-center
-        h-[720px]
-        mb-[180px]
+        h-[540px]
+        mb-[600px]
+
       "
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ amount: 0.8 }}
     >
       {/* Splash */}
-      <div style={{ background }} className="absolute inset-0 mx-30 mt-60 rounded-[38px]" />
+      <div style={{ background }} className="absolute inset-0 mx-30 mt-30 rounded-[38px]" />
 
       {/* Card */}
       <motion.div
@@ -79,7 +80,7 @@ const cardVariants = {
     y: 300,
   },
   onscreen: {
-    y: 50,
+    y: 30,
     rotate: -5,
     transition: {
       type: "spring",

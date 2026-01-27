@@ -1,23 +1,24 @@
 "use client"
 
-import { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { animate, inView } from "motion"
 
-const ScrollAnimations = () => {
+const ScrollAnimations = ({ children }) => {
+  const containerRef = useRef(null)
+
   useEffect(() => {
-    // Seleciona todos os elementos pre dentro das seções
-    const elements = document.querySelectorAll(".scroll-section pre")
+    if (!containerRef.current) return
+
+    // Seleciona todos os elementos dentro do container
+    const elements = containerRef.current.querySelectorAll(".animate-on-scroll")
 
     elements.forEach((element) => {
-      // Cria o observer de inView
+      // Configura animação quando entrar na viewport
       inView(element, () => {
         animate(
           element,
-          { opacity: 1, x: [-100, 0] },
-          {
-            duration: 0.9,
-            easing: [0.17, 0.55, 0.55, 1],
-          }
+          { opacity: 1, x: [ -100, 0 ] },
+          { duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }
         )
 
         return () => animate(element, { opacity: 0, x: -100 })
@@ -26,44 +27,25 @@ const ScrollAnimations = () => {
   }, [])
 
   return (
-    <div className="example">
-      <section className="scroll-section"><pre>Scroll</pre></section>
-      <section className="scroll-section"><pre>to</pre></section>
-      <section className="scroll-section"><pre>trigger</pre></section>
-      <section className="scroll-section"><pre>animations!</pre></section>
+    <div ref={containerRef} className="scroll-container">
+      {/* Adiciona classe para animação a todos os filhos */}
+      {React.Children.map(children, (child) =>
+        React.cloneElement(child, {
+          className: `${child.props.className ?? ""} animate-on-scroll`,
+          style: { transform: "translateX(-100px)", opacity: 0, ...child.props.style },
+        })
+      )}
 
       <style jsx>{`
-        .example {
+        .scroll-container {
           display: flex;
           flex-direction: column;
+          width: 100%;
         }
 
-        .scroll-section {
-          width: 100vw;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          overflow: hidden;
-          padding: 50px;
-          background: rgba(255, 0, 136, 0.1); /* placeholder */
-        }
-
-        .scroll-section:nth-child(2) { background: rgba(221,0,238,0.1); }
-        .scroll-section:nth-child(3) { background: rgba(153,17,255,0.1); }
-        .scroll-section:nth-child(4) { background: rgba(13,99,248,0.1); }
-
-        .scroll-section pre {
-          font-size: 48px;
-          color: #ff0088;
+        .animate-on-scroll {
           display: block;
-          transform: translateX(-100px);
-          opacity: 0;
         }
-
-        .scroll-section:nth-child(2) pre { color: #dd00ee; }
-        .scroll-section:nth-child(3) pre { color: #9911ff; }
-        .scroll-section:nth-child(4) pre { color: #0d63f8; }
       `}</style>
     </div>
   )
