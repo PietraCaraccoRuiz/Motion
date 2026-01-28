@@ -1,4 +1,5 @@
-import * as motion from "motion/react-client";
+import { motion } from "framer-motion";
+
 import mock1 from "../assets/mock1.png";
 import mock2 from "../assets/mock2.png";
 import mock3 from "../assets/mock3.png";

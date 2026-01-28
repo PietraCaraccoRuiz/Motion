@@ -1,7 +1,5 @@
-"use client"
-
 import React, { useEffect, useRef } from "react"
-import { animate, inView } from "motion"
+import { animate, inView } from "framer-motion"
 
 const ScrollAnimations = ({ children }) => {
   const containerRef = useRef(null)

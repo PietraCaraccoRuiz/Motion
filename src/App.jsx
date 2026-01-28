@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
